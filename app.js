@@ -28,7 +28,7 @@ async function loadData(){
 }
 const sums=id=>events.filter(e=>e.user_id===id).reduce((a,e)=>{a[e.counter_type]+=e.delta;return a},{flow:0,shame:0});
 function render(){
- $("welcomeName").textContent=myProfile.display_name;$("myAvatar").outerHTML=avatarHTML(myProfile,"my-avatar");$("memberCount").textContent=`${profiles.length} ÜYE`;
+$("myAvatar").outerHTML=avatarHTML(myProfile,"my-avatar").replace('class="my-avatar"','class="my-avatar" id="myAvatar"');
  const total=profiles.reduce((a,p)=>{const s=sums(p.id);a.flow+=s.flow;a.shame+=s.shame;return a},{flow:0,shame:0});
  $("totalFlow").textContent=total.flow;$("totalShame").textContent=total.shame;
  const sorted=[...profiles].sort((a,b)=>{const x=sums(a.id),y=sums(b.id);return (y.flow-y.shame)-(x.flow-x.shame)});
