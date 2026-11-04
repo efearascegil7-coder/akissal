@@ -1,9 +1,8 @@
-// AKIŞSAL — Supabase bağlantı bilgilerini buraya ekle.
-const SUPABASE_URL = "";
-const SUPABASE_ANON_KEY = "SUPABASE_ANON_KEY";
-const configured = SUPABASE_URL.startsWith("https://") && SUPABASE_ANON_KEY !== "SUPABASE_ANON_KEY";
-const $ = sb_publishable_Nv1Q4fEPTZK0PfqJ5uMJIg_sK7G83Py
-let db, currentUser, myProfile, profiles=[], events=[];
+// AKIŞSAL — Supabase bağlantı bilgileri
+const SUPABASE_URL = "https://vxegezxuyhupcdmpilpb.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_Nv1Q4fEPTZK0PfqJ5uMJIg_sK7G83Py";
+const configured = SUPABASE_URL.startsWith("https://") && SUPABASE_ANON_KEY.startsWith("sb_publishable_");
+const $ = id => document.getElementById(id);
 const avatarHTML = (p, cls="avatar") => p?.avatar_url ? `<img class="${cls}" src="${esc(p.avatar_url)}" alt="">` : `<div class="${cls}">${esc((p?.display_name||"?").slice(0,1).toUpperCase())}</div>`;
 const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function toast(msg){$("toast").textContent=msg;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),2600)}
