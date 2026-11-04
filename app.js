@@ -2,7 +2,8 @@
 const SUPABASE_URL = "https://vxegezxuyhupcdmpilpb.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_Nv1Q4fEPTZK0PfqJ5uMJIg_sK7G83Py";
 const configured = SUPABASE_URL.startsWith("https://") && SUPABASE_ANON_KEY.startsWith("sb_publishable_");
-const $ = id => document.getElementById(id);function authMessage(msg){$("authMsg").textContent=msg}
+const $ = id => document.getElementById(id);
+function authMessage(msg){$("authMsg").textContent=msg}
 let db, currentUser, myProfile, profiles=[], events=[];
 
 const avatarHTML = (p, cls="avatar") => p?.avatar_url
