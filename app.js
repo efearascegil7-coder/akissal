@@ -3,6 +3,19 @@ const SUPABASE_URL = "https://vxegezxuyhupcdmpilpb.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_Nv1Q4fEPTZK0PfqJ5uMJIg_sK7G83Py";
 const configured = SUPABASE_URL.startsWith("https://") && SUPABASE_ANON_KEY.startsWith("sb_publishable_");
 const $ = id => document.getElementById(id);function authMessage(msg){$("authMsg").textContent=msg}
+let db, currentUser, myProfile, profiles=[], events=[];
+
+const avatarHTML = (p, cls="avatar") => p?.avatar_url
+  ? `<img class="${cls}" src="${esc(p.avatar_url)}" alt="">`
+  : `<div class="${cls}">${esc((p?.display_name||"?").slice(0,1).toUpperCase())}</div>`;
+
+const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function toast(msg){
+  $("toast").textContent=msg;
+  $("toast").classList.add("show");
+  setTimeout(()=>$("toast").classList.remove("show"),2600);
+}
 function showTab(tab){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));$("loginForm").classList.toggle("hidden",tab!=="login");$("signupForm").classList.toggle("hidden",tab!=="signup");authMessage("")}
 document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
 function showApp(on){$("authView").classList.toggle("hidden",on);$("appView").classList.toggle("hidden",!on);$("logoutBtn").classList.toggle("hidden",!on)}
