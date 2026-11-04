@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#090d18"><meta name="description" content="AKIŞSAL — arkadaş grubunun kendi dünyası">
+  <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg">
+  <title>AKIŞSAL</title><link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<div class="ambient a1"></div><div class="ambient a2"></div>
+<main class="shell">
+  <header class="topbar"><a class="brand" href="#"><span class="brand-mark">A</span><span>AKIŞSAL<small>ARKADAŞ GRUBUNUN KENDİ DÜNYASI</small></span></a><button id="logoutBtn" class="ghost hidden">Çıkış</button></header>
+  <section id="setupNotice" class="panel hidden"><h2>Kurulum gerekiyor</h2><p>Önce <code>app.js</code> içindeki Supabase URL ve anon key alanlarını doldurup veritabanı kurulumunu tamamla. Adımlar README dosyasında.</p></section>
+  <section id="authView" class="auth-layout hidden">
+    <div class="hero"><div class="eyebrow">SADECE DAVETLİLER</div><h1>Grubun<br><span>nabzı.</span></h1><p>Akışını yükselt, ayıbını kaydet. Puanların tek adresi.</p><div class="hero-orbit"><div class="orbit-core">A</div><div class="orbit-tag t1">AKIŞ +</div><div class="orbit-tag t2">AYIP !</div></div></div>
+    <div class="auth-card panel"><div class="tabs"><button class="tab active" data-tab="login">Giriş yap</button><button class="tab" data-tab="signup">Hesap oluştur</button></div>
+      <form id="loginForm"><h2>Tekrar hoş geldin.</h2><label>E-posta<input type="email" id="loginEmail" required autocomplete="email"></label><label>Şifre<input type="password" id="loginPassword" required autocomplete="current-password"></label><button class="primary full">Giriş yap <span>↗</span></button></form>
+      <form id="signupForm" class="hidden"><h2>Aramıza katıl.</h2><label>İsim<input id="signupName" maxlength="28" required placeholder="Nasıl hitap edelim?"></label><label>E-posta<input type="email" id="signupEmail" required autocomplete="email"></label><label>Şifre<input type="password" id="signupPassword" minlength="6" required autocomplete="new-password"></label><label>Davet kodu<input id="inviteCode" required placeholder="Sana verilen kod"></label><label>Profil fotoğrafı <span class="muted">(isteğe bağlı)</span><input type="file" id="avatarFile" accept="image/*"></label><button class="primary full">Hesap oluştur <span>↗</span></button></form>
+      <p id="authMsg" class="message"></p><p class="fine">AKIŞSAL'a yalnızca davet koduyla katılabilirsin.</p>
+    </div>
+  </section>
+  <section id="appView" class="hidden">
+    <div class="welcome-row"><div><div class="eyebrow">TOPLULUK PANELİ</div><h1>Selam, <span id="welcomeName">—</span></h1><p class="muted">Bugün grubun akışı nasıl?</p></div><div class="my-avatar" id="myAvatar">A</div></div>
+    <div class="stats-grid"><article class="stat-card flow"><div class="stat-head"><span class="stat-icon">↗</span><span>TOPLAM AKIŞ</span></div><strong id="totalFlow">0</strong><small>Topluluk puanı</small></article><article class="stat-card shame"><div class="stat-head"><span class="stat-icon">!</span><span>TOPLAM AYIP</span></div><strong id="totalShame">0</strong><small>Topluluk puanı</small></article></div>
+    <div class="section-head"><div><div class="eyebrow">GRUPTAKİLER</div><h2>Liderlik tablosu</h2></div><span class="pill" id="memberCount">0 ÜYE</span></div>
+    <div id="leaderboard" class="leaderboard"></div>
+    <section id="adminPanel" class="panel admin hidden"><div class="section-head"><div><div class="eyebrow">SADECE YÖNETİCİ</div><h2>Kontrol merkezi</h2></div><span class="admin-pill">HOST</span></div>
+      <div class="admin-grid"><label>Üye<select id="targetUser"></select></label><label>Sayaç<select id="counterType"><option value="flow">Akışmetre</option><option value="shame">Ayıpmetre</option></select></label><label>Puan<input id="scoreAmount" type="number" value="1" min="1" max="999"></label></div>
+      <label>Not <input id="scoreNote" maxlength="100" placeholder="Örn. Efsane hareket / unutulmaz ayıp"></label>
+      <div class="button-row"><button id="addScore" class="primary">＋ Puan ekle</button><button id="removeScore" class="danger">− Puan sil</button></div>
+      <div class="divider"></div><div class="section-head"><div><h3>Davet bağlantısı</h3><p class="muted">Yeni arkadaşların için tek kullanımlık kod üret.</p></div><button id="makeInvite" class="secondary">Kod üret</button></div><div id="inviteResult" class="invite-result hidden"></div>
+      <div class="divider"></div><h3>Son puan hareketleri</h3><div id="activity" class="activity"></div>
+    </section>
+    <div class="section-head profile-heading"><div><div class="eyebrow">KENDİ KARTIN</div><h2>Profilim</h2></div></div>
+    <div id="myProfileCard" class="profile-card"></div>
+    <footer>AKIŞSAL <span>•</span> Grup içi eğlence platformu</footer>
+  </section>
+</main>
+<div id="toast" class="toast"></div>
+<script>if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));</script><script src="app.js"></script>
+</body></html>
