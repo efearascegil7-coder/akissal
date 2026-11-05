@@ -60,4 +60,52 @@ async function start(){
  db.auth.onAuthStateChange(async(_event,session)=>{if(session){currentUser=session.user;try{await loadData();showApp(true)}catch(e){showApp(false);toast(e.message)}}else{currentUser=null;showApp(false)}});
  if(session){currentUser=session.user;try{await loadData();showApp(true)}catch(e){showApp(false);toast(e.message)}}else showApp(false);
 }
+// AKIŞSAL - Profil düzenleme
+$("editProfileBtn").addEventListener("click",()=>{
+  $("profileNameInput").value=myProfile.display_name||"";
+  $("profilePhotoInput").value="";
+  $("profileModal").classList.remove("hidden");
+});
+
+$("cancelProfileBtn").addEventListener("click",()=>{
+  $("profileModal").classList.add("hidden");
+});
+
+$("saveProfileBtn").addEventListener("click",async()=>{
+  const btn=$("saveProfileBtn");
+  const name=$("profileNameInput").value.trim();
+  const file=$("profilePhotoInput").files[0];
+
+  if(name.length<2||name.length>30){
+    toast("İsim 2-30 karakter arasında olmalı.");
+    return;
+  }
+
+  btn.disabled=true;
+  btn.textContent="Kaydediliyor…";
+
+  try{
+    let avatarUrl=null;
+
+    if(file){
+      avatarUrl=await uploadAvatar(file,currentUser.id);
+    }
+
+    const {error}=await db.rpc("update_my_profile",{
+      p_display_name:name,
+      p_avatar_url:avatarUrl
+    });
+
+    if(error)throw error;
+
+    $("profileModal").classList.add("hidden");
+    await refresh();
+    toast("Profilin başarıyla güncellendi!");
+  }catch(e){
+    toast(e.message||"Profil güncellenemedi.");
+  }finally{
+    btn.disabled=false;
+    btn.textContent="Kaydet";
+  }
+});
 start();
