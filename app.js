@@ -110,5 +110,6 @@ $("saveProfileBtn").addEventListener("click",async()=>{
 });
 $("enterAppBtn").addEventListener("click",()=>{
   $("introScreen").classList.add("hidden");
+  showApp(!!currentUser);
 });
 start();
