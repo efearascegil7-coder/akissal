@@ -108,4 +108,7 @@ $("saveProfileBtn").addEventListener("click",async()=>{
     btn.textContent="Kaydet";
   }
 });
+$("enterAppBtn").addEventListener("click",()=>{
+  $("introScreen").classList.add("hidden");
+});
 start();
