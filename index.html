@@ -32,8 +32,23 @@
       <div class="divider"></div><div class="section-head"><div><h3>Davet bağlantısı</h3><p class="muted">Yeni arkadaşların için tek kullanımlık kod üret.</p></div><button id="makeInvite" class="secondary">Kod üret</button></div><div id="inviteResult" class="invite-result hidden"></div>
       <div class="divider"></div><h3>Son puan hareketleri</h3><div id="activity" class="activity"></div>
     </section>
-    <div class="section-head profile-heading"><div><div class="eyebrow">KENDİ KARTIN</div><h2>Profilim</h2></div></div>
+    <div class="section-head profile-heading"><div><div class="eyebrow">KENDİ KARTIN</div><h2>Profilim</h2></div><button id="editProfileBtn" class="secondary">Profili düzenle</button></div>
     <div id="myProfileCard" class="profile-card"></div>
+    <div id="profileModal" class="profile-modal hidden">
+  <div class="profile-modal-content">
+    <h2>Profilini düzenle</h2>
+    <label>Görünen adın
+      <input id="profileNameInput" type="text" maxlength="30" placeholder="Adını yaz">
+    </label>
+    <label>Profil fotoğrafın
+      <input id="profilePhotoInput" type="file" accept="image/*">
+    </label>
+    <div class="button-row">
+      <button id="saveProfileBtn" class="primary">Kaydet</button>
+      <button id="cancelProfileBtn" class="secondary">Vazgeç</button>
+    </div>
+  </div>
+</div>
     <footer>AKIŞSAL <span>•</span> Grup içi eğlence platformu</footer>
   </section>
 </main>
